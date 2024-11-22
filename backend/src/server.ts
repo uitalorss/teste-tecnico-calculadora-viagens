@@ -1,8 +1,10 @@
+import "express-async-errors";
 import express from 'express';
 import cors from "cors";
-import { dataSource } from './shared/database/dataSource';
 import "reflect-metadata";
+import { dataSource } from './shared/database/dataSource';
 import { router } from './shared/infra/routes';
+import "./shared/container/index"
 
 const app = express();
 

@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "migration:create": "typeorm-ts-node-commonjs -d ./src/shared/database/dataSource.ts migration:create",
+    "migration:generate": "typeorm-ts-node-commonjs -d ./src/shared/database/dataSource.ts migration:generate",
     "migration:run": "typeorm-ts-node-commonjs -d ./src/shared/database/dataSource.ts migration:run",
     "dev": "nodemon --exec ts-node ./src/server.ts",
     "lint": "eslint . --ext .ts"
@@ -12,6 +12,7 @@
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
     "express": "^4.21.1",
+    "express-async-errors": "^3.1.1",
     "pg": "^8.13.1",
     "reflect-metadata": "^0.2.2",
     "tsyringe": "^4.8.0",

@@ -1,62 +1,26 @@
 import "dotenv/config";
-import axios from "axios";
 import { Request, Response } from "express";
 import driversData from "../../../../shared/database/drivers.json";
+import { container } from "tsyringe";
+import { CreateRideService } from "../../services/CreateRideService";
+import { EstimateRideService } from "../../services/EstimateRideService";
 
 
 export class RideController {
     public async estimate(req: Request, res: Response) {
-        const {origin, destination} = req.body;
+        const {customer_id, origin, destination} = req.body;
+        const estimateRide = container.resolve(EstimateRideService);
 
-        const estimateData = {
-            origin: {
-                address: origin
-            },
-            destination: {
-                address: destination
-            },
-            travelMode: "DRIVE",
-            routingPreference: "TRAFFIC_AWARE"
-        }
+        const options = await estimateRide.execute({customer_id, origin, destination})
 
-        driversData.sort((a, b) => {
-            if(a.minimum < b.minimum)return -1;
-            if(a.minimum > b.minimum) return 1;
-            return 0;
-        })
+        res.json(options);
+    }
 
-        try {
-            const rideData = await axios.post(`https://routes.googleapis.com/directions/v2:computeRoutes`, estimateData, {
-                headers: {
-                    "Content-Type": "application/json",
-                    "X-Goog-Api-Key": process.env.GOOGLE_API_KEY,
-                    "X-Goog-FieldMask": "routes"
-                }
-            });
-            const [ride] = rideData.data.routes[0].legs;
+    public async confirm(req: Request, res: Response) {
+        const {customer_id, origin, destination, distance, duration, driver, value} = req.body; 
+        const confirmRide = container.resolve(CreateRideService);
 
-            const drivers = driversData.map((driver) => ({
-                ...driver,
-                value: driver.fee * (ride.distanceMeters / 1000)
-            }))
-
-            const estimated = {
-                origin: {
-                    latitude: ride.startLocation.latLng.latitude,
-                    longitude: ride.startLocation.latLng.longitude
-                },
-                destination: {
-                    latitude: ride.endLocation.latLng.latitude,
-                    longitude: ride.endLocation.latLng.latitude
-                },
-                distance: ride.distanceMeters,
-                duration: ride.duration,
-                options: drivers,
-                routeResponse: rideData.data
-            }
-            res.json(estimated)
-        } catch (error) {
-            console.error(error);
-        }
+        const ride = await confirmRide.execute({customer_id, origin, destination, distance, duration, driver, value});
+        res.json(ride)
     }
 }
