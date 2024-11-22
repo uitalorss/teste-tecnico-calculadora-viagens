@@ -1,5 +1,4 @@
-import "dotenv/config";
-
+import "dotenv/config"
 import { DataSource } from "typeorm";
 
 const dbport = process.env.DB_PORT as unknown as number | undefined;
