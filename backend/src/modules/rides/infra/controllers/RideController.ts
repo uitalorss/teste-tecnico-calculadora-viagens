@@ -4,6 +4,8 @@ import driversData from "../../../../shared/database/drivers.json";
 import { container } from "tsyringe";
 import { CreateRideService } from "../../services/CreateRideService";
 import { EstimateRideService } from "../../services/EstimateRideService";
+import { GetRidesService } from "../../services/GetRidesService";
+import { BadRequestError } from "../../../../shared/errors/ApiError";
 
 
 export class RideController {
@@ -22,5 +24,14 @@ export class RideController {
 
         const ride = await confirmRide.execute({customer_id, origin, destination, distance, duration, driver, value});
         res.json(ride)
+    }
+
+    public async find(req: Request, res: Response){
+        const {customer_id} = req.params;
+        const {driver_id} = req.query;
+        const getRides = container.resolve(GetRidesService);
+        
+        const rides = await getRides.execute({customer_id, driver_id});
+        res.json(rides);
     }
 }

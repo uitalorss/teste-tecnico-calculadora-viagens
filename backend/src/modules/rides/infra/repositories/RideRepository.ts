@@ -32,8 +32,13 @@ export class RideRepository implements IRideRepository {
         return ride;
     }
 
-    get({ }: IGetRidesDTO): Promise<IGetRidesResponseDTO> {
-        throw new Error("Method not implemented.");
+    public async get({customer_id}: IGetRidesDTO): Promise<Ride[]> {
+        const rides = await this.rideRepository.find({
+            where: {
+                customer_id
+            }
+        });
+        return rides;
     }
 
 }
