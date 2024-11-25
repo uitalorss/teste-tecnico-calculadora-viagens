@@ -1,19 +1,21 @@
 export class ApiError extends Error {
     public readonly statusCode: number;
-    constructor(message: string, statusCode: number) {
+    public readonly error_code: string;
+    constructor(error_code: string, message: string, statusCode: number) {
         super(message);
         this.statusCode = statusCode;
+        this.error_code = error_code;
     }
 }
 
 export class BadRequestError extends ApiError {
     constructor(message: string) {
-        super(message, 400);
+        super("INVALID_DATA", message, 400);
     }
 }
 
 export class NotFoundError extends ApiError {
     constructor(message: string) {
-        super(message, 404);
+        super("DRIVER_NOT_FOUND", message, 404);
     }
 }

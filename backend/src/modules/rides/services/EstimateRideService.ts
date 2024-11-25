@@ -2,11 +2,16 @@ import axios from "axios";
 import { injectable } from "tsyringe";
 import driversData from "../../../shared/database/drivers.json"
 import { IEstimateRideRequestDTO } from "../domain/models/DTO/IEstimateRideRequestDTO";
+import { BadRequestError } from "../../../shared/errors/ApiError";
 
 @injectable()
 export class EstimateRideService {
 
     public async execute({customer_id, origin, destination}: IEstimateRideRequestDTO){
+        if(origin === destination){
+            throw new BadRequestError("Endereços de partida e destino são iguais.")
+        }
+
         const estimateData = {
             origin: {
                 address: origin
