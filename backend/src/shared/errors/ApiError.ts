@@ -14,11 +14,23 @@ export class InvalidDataError extends ApiError {
     }
 }
 
+export class InvalidDriverError extends ApiError {
+    constructor(message: string) {
+        super("INVALID_DRIVER", message, 400);
+    }
+}
+
 export class DriverNotFoundError extends ApiError {
     constructor(message: string) {
         super("DRIVER_NOT_FOUND", message, 404);
     }
 }
+
+export class NoRidesFoundError extends ApiError {
+    constructor(message: string) {
+        super("NO_RIDES_FOUND", message, 404);
+    }
+}   
 
 export class InvalidDistanceError extends ApiError {
     constructor(message: string) {

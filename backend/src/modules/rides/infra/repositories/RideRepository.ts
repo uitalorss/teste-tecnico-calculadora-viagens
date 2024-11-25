@@ -32,13 +32,22 @@ export class RideRepository implements IRideRepository {
         return ride;
     }
 
-    public async get({customer_id}: IGetRidesDTO): Promise<Ride[]> {
-        const rides = await this.rideRepository.find({
-            where: {
-                customer_id
-            }
-        });
-        return rides;
+    public async get({customer_id, driver_id}: IGetRidesDTO): Promise<Ride[]> {
+        if(driver_id){
+            const rides = await this.rideRepository.find({
+                where: {
+                    customer_id,
+                    driver: parseInt(driver_id)
+                },
+            });
+            return rides;
+        }else{
+            const rides = await this.rideRepository.find({
+                where: {
+                    customer_id
+                }
+            });
+            return rides;
+        }
     }
-
 }
