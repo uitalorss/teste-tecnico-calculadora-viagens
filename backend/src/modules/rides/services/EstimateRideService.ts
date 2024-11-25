@@ -40,7 +40,7 @@ export class EstimateRideService {
 
             const drivers = driversData.map((driver) => ({
                 ...driver,
-                value: driver.fee * (ride.distanceMeters / 1000)
+                value: (driver.fee * (ride.distanceMeters / 1000)).toFixed(2)
             }))
 
             const estimated = {
