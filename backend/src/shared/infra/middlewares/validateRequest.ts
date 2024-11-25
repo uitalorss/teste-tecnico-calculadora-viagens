@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from "express";
-import { BadRequestError } from "../../errors/ApiError";
+import { InvalidDataError } from "../../errors/ApiError";
 import { z } from "zod";
 
 
@@ -11,7 +11,7 @@ export const validateRequest = (schema: z.AnyZodObject | z.ZodOptional<z.AnyZodO
         const err = error;
         if (err instanceof z.ZodError) {
             const { issues } = err;
-            throw new BadRequestError(issues[0].message);
+            throw new InvalidDataError(issues[0].message);
         }
     }
 };

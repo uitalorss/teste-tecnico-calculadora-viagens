@@ -1,11 +1,9 @@
 import "dotenv/config";
 import { Request, Response } from "express";
-import driversData from "../../../../shared/database/drivers.json";
 import { container } from "tsyringe";
 import { CreateRideService } from "../../services/CreateRideService";
 import { EstimateRideService } from "../../services/EstimateRideService";
 import { GetRidesService } from "../../services/GetRidesService";
-import { BadRequestError } from "../../../../shared/errors/ApiError";
 
 
 export class RideController {

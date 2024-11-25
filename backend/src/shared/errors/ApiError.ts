@@ -8,14 +8,20 @@ export class ApiError extends Error {
     }
 }
 
-export class BadRequestError extends ApiError {
+export class InvalidDataError extends ApiError {
     constructor(message: string) {
         super("INVALID_DATA", message, 400);
     }
 }
 
-export class NotFoundError extends ApiError {
+export class DriverNotFoundError extends ApiError {
     constructor(message: string) {
         super("DRIVER_NOT_FOUND", message, 404);
+    }
+}
+
+export class InvalidDistanceError extends ApiError {
+    constructor(message: string) {
+        super("INVALID_DISTANCE", message, 406);
     }
 }
