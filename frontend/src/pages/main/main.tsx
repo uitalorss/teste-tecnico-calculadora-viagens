@@ -3,7 +3,6 @@ import { Button, FormRoutes } from "./styles"
 import { useContext } from "react";
 import { RideContext } from "../../contexts/RideContext";
 import { Container, Header } from "../../styles/global";
-import { useNavigate } from "react-router-dom";
 
 
 export const Main = () => {

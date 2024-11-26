@@ -44,3 +44,18 @@ export const Header = styled.header`
     font-size: 2rem;
   }
 `;
+
+export const SpanError = styled.span`
+
+  &.active {
+    display: block;
+    padding: 1rem;
+    background: #ecf0f160;
+    color: #34495e;
+    border-radius: 10px;
+    text-align: center;
+    @media (max-width: 820px) {
+      width: 100%;
+    }
+  }
+`;

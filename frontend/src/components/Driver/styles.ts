@@ -9,7 +9,16 @@ export const DriverContainer = styled.div`
     padding: 1rem 0.5rem;
     border-radius: 10px;
     border: 2px solid #b2bec3;
-    th{
-        text-align: left;
+`
+
+export const ContentDriver = styled.div`
+    display: flex;
+    gap: .25rem .75rem;
+    p{
+        font-size: .8rem;
+    }
+    &.description{
+        flex-direction: column;
+        padding: .25rem 0 0.5rem 0.5rem;
     }
 `

@@ -1,12 +1,12 @@
 import { useContext } from "react"
-import { Container, Header } from "../../styles/global"
+import { Container, Header, SpanError } from "../../styles/global"
 import { RideContext } from "../../contexts/RideContext"
 import { RideOptions } from "./styles"
 import { DriverList } from "../../components/DriverList/DriverList"
 
 
 export const Confirm = () => {
-    const {estimateRides} = useContext(RideContext)
+    const {estimateRides, errorMessage} = useContext(RideContext)
 
     return(
         <Container>
@@ -19,6 +19,9 @@ export const Confirm = () => {
                 <h3>Motoristas</h3>
                 <DriverList driversList={estimateRides!.options} />
             </RideOptions>
+            <SpanError className={errorMessage === "" ? "" : "active"}>
+                    {errorMessage}
+            </SpanError>
 
         </Container>
     )
