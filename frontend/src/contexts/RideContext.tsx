@@ -46,7 +46,7 @@ export function RideContextProvider({children}: IRideContextProviderProps) {
             console.log(coordinate);
             const validCoordinate = coordinate.replace(/\\/g, "%5C");
             console.log(validCoordinate)
-            const urlImage = await axios.get(`https://maps.googleapis.com/maps/api/staticmap?size=600x400&path=enc:${validCoordinate}&key=AIzaSyANFT-zRWY8oWocufB0AFk3D9dbf1sX7hs`, corsConfig);
+            const urlImage = await axios.get(`https://maps.googleapis.com/maps/api/staticmap?size=600x400&path=enc:${validCoordinate}&key=${GOOGLE_API_KEY}`, corsConfig);
             console.log(urlImage)
         } catch (err) {
             const error = err as AxiosError;
