@@ -1,18 +1,5 @@
 import styled from "styled-components";
 
-export const Header = styled.header`
-  width: 100%;
-  background: #03a877;
-  padding: 3rem;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  h2 {
-    font-size: 2rem;
-  }
-`;
-
 export const FormRoutes = styled.div`
     padding-top: 1rem;
     display: flex;
@@ -42,6 +29,8 @@ export const Button = styled.button`
   color: #f2f2f2;
   font-weight: bold;
   font-size: 1rem;
+  display: flex;
+  justify-content: center;
   cursor: pointer;
 
   transition: background-color 0.1s;

@@ -1,12 +1,12 @@
 import { RideContextProvider } from "./contexts/RideContext"
-import { Main } from "./pages/main/main"
+import { Router } from "./Router"
 import { GlobalStyled } from "./styles/global"
 
 function App() {
 
   return (
     <RideContextProvider>
-      <Main />
+      <Router />
       <GlobalStyled />
     </RideContextProvider>
   )
