@@ -1,14 +1,16 @@
 import { ContentRide, RideContainer } from "./styles";
 import { IRide } from "../../helpers/IRide";
+import { format } from "date-fns";
 
 interface IRideProps {
     ride: IRide
 }
 
 export const Ride = ({ride}: IRideProps) => {
-
+    
     return(
         <RideContainer>
+            <h4 className="date">{String(format(new Date(ride.date), "dd/MM/yyyy HH:mm"))}</h4>
             <ContentRide>
                 <h4>Nome:</h4>
                 <p>{ride.driver.name}</p>
