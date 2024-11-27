@@ -33,14 +33,14 @@ export class GetRidesService {
             id: item.id,
             origin: item.origin,
             destination: item.destination,
-            date: item.date,
             distance: item.distance,
             duration: item.duration,
             driver: {
                 id: item.driver,
                 name: extractDriverName(item)
             },
-            value: item.value
+            value: item.value,
+            date: item.created_at
         }))
 
 

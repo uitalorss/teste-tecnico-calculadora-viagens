@@ -1,8 +1,6 @@
 import { Repository } from "typeorm";
 import { IConfirmRideDTO } from "../../domain/models/DTO/IConfirmRideDTO";
-import { IConfirmRideResponseDTO } from "../../domain/models/DTO/IConfirmRideResponseDTO";
 import { IGetRidesDTO } from "../../domain/models/DTO/IGetRIdesDTO";
-import { IGetRidesResponseDTO } from "../../domain/models/DTO/IGetRIdesResponseDTO";
 import { IRideRepository } from "../../domain/repositories/IRideRepository";
 import { Ride } from "../entities/Ride";
 import { dataSource } from "../../../../shared/database/dataSource";
@@ -17,7 +15,7 @@ export class RideRepository implements IRideRepository {
     }
 
 
-    public async create({customer_id, destination, distance, driver, duration, origin, value}: IConfirmRideDTO): Promise<void> {
+    public async create({customer_id, destination, distance, driver, duration, origin, value}: IConfirmRideDTO): Promise<IRide> {
         const ride = this.rideRepository.create({
             customer_id,
             destination,
@@ -29,6 +27,7 @@ export class RideRepository implements IRideRepository {
         })
 
         await this.rideRepository.save(ride);
+        return ride;
     }
 
     public async get({customer_id, driver_id}: IGetRidesDTO): Promise<Ride[]> {
@@ -38,7 +37,7 @@ export class RideRepository implements IRideRepository {
                     customer_id,
                     driver: parseInt(driver_id)
                 },order: {
-                    date: "DESC",
+                    created_at: "DESC"
                 }
             });
             return rides;
@@ -47,7 +46,7 @@ export class RideRepository implements IRideRepository {
                 where: {
                     customer_id
                 },order: {
-                    date: "DESC",
+                    created_at: "DESC"
                 }
             });
             return rides;

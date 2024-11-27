@@ -1,5 +1,6 @@
 import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn } from "typeorm";
 import { IRide } from "../../domain/models/IRide";
+import { text } from "stream/consumers";
 
 @Entity("rides")
 export class Ride implements IRide {
@@ -28,6 +29,5 @@ export class Ride implements IRide {
     value: number;
 
     @CreateDateColumn({type: "timestamptz"})
-    date: Date;
-    
+    created_at: Date;   
 }
