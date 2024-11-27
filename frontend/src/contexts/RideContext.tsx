@@ -5,6 +5,7 @@ import axios, { AxiosError } from "axios";
 import { useNavigate } from "react-router-dom";
 import { IAdress } from "../helpers/IAddress";
 import { IRideList } from "../helpers/IRideList";
+import { IApiError } from "../helpers/IApiError";
 
 interface IRideContextProviderType {
     estimateRides: IEstimateRide | undefined;
@@ -58,14 +59,6 @@ export function RideContextProvider({children}: IRideContextProviderProps) {
             }
         };
 
-        const corsConfig = {
-            headers: {
-                "Access-Control-Allow-Credentials": "true",
-                "Access-Control-Allow-Origin": "*",
-                "Access-Control-Allow-Methods": "GET,OPTIONS,PATCH,DELETE,POST,PUT",
-                "Access-Control-Allow-Headers": "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version, Authorization"
-            }
-        }
         try {
             const estimate = await axios.post("http://localhost:8080/ride/estimate", data, axiosConfig);
             setEstimateRides(estimate.data)
@@ -85,7 +78,8 @@ export function RideContextProvider({children}: IRideContextProviderProps) {
                 console.log(error)
             }
             setCustomer("")
-            setErrorMessage(error.response?.data.error_description)
+            const responseData: IApiError = error.response?.data as IApiError
+            setErrorMessage(responseData.error_description)
         }
     }
 
@@ -102,7 +96,8 @@ export function RideContextProvider({children}: IRideContextProviderProps) {
             if(!axios.isAxiosError(error)){
                 console.log(error)
             }
-            alert(error.response?.data.error_description)
+            const responseData: IApiError = error.response?.data as IApiError
+            setErrorMessage(responseData.error_description)
         }
     }
 
@@ -117,7 +112,8 @@ export function RideContextProvider({children}: IRideContextProviderProps) {
             if(!axios.isAxiosError(error)){
                 console.log(error)
             }
-            alert(error.response?.data.error_description)
+            const responseData: IApiError = error.response?.data as IApiError
+            setErrorMessage(responseData.error_description)
         }
     }
 
