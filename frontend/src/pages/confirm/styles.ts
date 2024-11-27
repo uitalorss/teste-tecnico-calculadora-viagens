@@ -17,3 +17,11 @@ export const RideInfo = styled.div`
         gap: 1rem 0.5rem;
     }
 `
+
+export const MapSection = styled.div`
+    margin: 0 0 2rem 0;
+    img{
+        width: 100%;
+        border-radius: 8px;
+    }
+`

@@ -15,11 +15,16 @@ interface IRideContextProviderType {
     confirmRide: (data: FieldValues) => void;
     historyRide: (data: FieldValues) => void;
     address: IAdress | undefined;
+    sourceImage: string | undefined;
     errorMessage: string;
 }
 
 interface IRideContextProviderProps {
     children: ReactNode
+}
+
+interface ICoordinateMapProps {
+    coordinate: string
 }
 
 // eslint-disable-next-line react-refresh/only-export-components
@@ -29,6 +34,7 @@ export function RideContextProvider({children}: IRideContextProviderProps) {
     const [estimateRides, setEstimateRides_] = useState<IEstimateRide>();
     const [rideList, setRideList_] = useState<IRideList>();
     const [customer, setCustomer_] = useState("");
+    const [sourceImage, setSourceImage] = useState("");
     const [address, setAddress] = useState<IAdress>();
     const [errorMessage, setErrorMessage] = useState("");
     const navigate = useNavigate();
@@ -63,14 +69,15 @@ export function RideContextProvider({children}: IRideContextProviderProps) {
         try {
             const estimate = await axios.post("http://localhost:8080/ride/estimate", data, axiosConfig);
             setEstimateRides(estimate.data)
-            /*
-            const coordinate = estimate.data.routeResponse.routes[0].legs[0].polyline.encodedPolyline
-            const validCoordinate = coordinate.replace(/\\/g, "%5C");
-            const urlImage = await axios.get(`https://maps.googleapis.com/maps/api/staticmap?size=600x400&path=enc:${validCoordinate}&key=GOOGLE_API_KEY`, corsConfig);
-            console.log(urlImage)*/
+            
+            const encodedMap = {
+                coordinate: estimate.data.routeResponse.routes[0].legs[0].polyline.encodedPolyline
+            }
             const addressData = {origin: data.origin, destination: data.destination}
             setAddress(addressData);
             setCustomer(data.customer_id);
+            setErrorMessage("");
+            generateMap(encodedMap);
             navigate("/confirm")
         } catch (err) {
             const error = err as AxiosError;
@@ -78,7 +85,7 @@ export function RideContextProvider({children}: IRideContextProviderProps) {
                 console.log(error)
             }
             setCustomer("")
-            console.log(error.response?.data.error_description)
+            setErrorMessage(error.response?.data.error_description)
         }
     }
 
@@ -114,6 +121,11 @@ export function RideContextProvider({children}: IRideContextProviderProps) {
         }
     }
 
+    async function generateMap(coordinateMap: ICoordinateMapProps){
+        const image = await axios.post("http://localhost:8080/ride/map", coordinateMap);
+        setSourceImage(image.data.image);
+    }
+
     return(
         <RideContext.Provider
         value={{
@@ -125,7 +137,8 @@ export function RideContextProvider({children}: IRideContextProviderProps) {
             errorMessage,
             historyRide,
             rideList,
-            customer       
+            customer,
+            sourceImage    
         }}
         >
             {children}

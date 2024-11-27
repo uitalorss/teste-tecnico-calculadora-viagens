@@ -28,7 +28,7 @@ export const Container = styled.main`
   height: 100%;
   background: #03a877;
   color: #f2f2f2;
-  padding: 0 2rem;
+  padding: 0 2rem 1rem 2rem;
   margin: 0 auto;
   --webkit-font-smoothing: antialiased;
 `;

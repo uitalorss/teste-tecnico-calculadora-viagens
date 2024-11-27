@@ -1,18 +1,26 @@
 import { useContext } from "react"
 import { Container, Header } from "../../styles/global"
 import { RideContext } from "../../contexts/RideContext"
-import { RideInfo, RideOptions } from "./styles"
+import { MapSection, RideInfo, RideOptions } from "./styles"
 import { DriverList } from "../../components/DriverList/DriverList"
 
 
 export const Confirm = () => {
-    const {estimateRides} = useContext(RideContext)
+    const {estimateRides, sourceImage} = useContext(RideContext)
 
     return(
         <Container>
             <Header>
                 <h3>Suas opções de viagem</h3>
             </Header>
+
+            <MapSection>
+                {sourceImage ? (
+                 <img src={sourceImage}  />   
+                ):(
+                    <p>Carregando imagem...</p>
+                )}
+            </MapSection>
 
             <RideOptions>
                 <RideInfo>
