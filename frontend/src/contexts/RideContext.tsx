@@ -4,12 +4,17 @@ import { FieldValues } from "react-hook-form";
 import axios, { AxiosError } from "axios";
 import { useNavigate } from "react-router-dom";
 import { IAdress } from "../helpers/IAddress";
+import { IRide } from "../helpers/IRide";
+import { IRideList } from "../helpers/IRideList";
 
 interface IRideContextProviderType {
     estimateRides: IEstimateRide | undefined;
-    handleEstimateRide: (data: FieldValues) => void
-    setEstimateRides: (data: IEstimateRide | undefined) => void
+    rideList: IRideList | undefined;
+    customer: string | undefined;
+    handleEstimateRide: (data: FieldValues) => void;
+    setEstimateRides: (data: IEstimateRide | undefined) => void;
     confirmRide: (data: FieldValues) => void;
+    historyRide: (data: FieldValues) => void;
     address: IAdress | undefined;
     errorMessage: string;
 }
@@ -22,12 +27,22 @@ export const RideContext = createContext({} as IRideContextProviderType)
 
 export function RideContextProvider({children}: IRideContextProviderProps) {
     const [estimateRides, setEstimateRides_] = useState<IEstimateRide>();
-    const [address, setAddress] = useState<IAdress>()
-    const [errorMessage, setErrorMessage] = useState("")
+    const [rideList, setRideList_] = useState<IRideList>();
+    const [customer, setCustomer_] = useState("");
+    const [address, setAddress] = useState<IAdress>();
+    const [errorMessage, setErrorMessage] = useState("");
     const navigate = useNavigate();
 
     function setEstimateRides(data: IEstimateRide | undefined){
         setEstimateRides_(data)
+    }
+
+    function setRideList(data: IRideList | undefined){
+        setRideList_(data);
+    }
+
+    function setCustomer(data: string){
+        setCustomer_(data)
     }
 
     async function handleEstimateRide(data: FieldValues){
@@ -55,12 +70,14 @@ export function RideContextProvider({children}: IRideContextProviderProps) {
             console.log(urlImage)*/
             const addressData = {origin: data.origin, destination: data.destination}
             setAddress(addressData);
+            setCustomer(data.customer_id);
             navigate("/confirm")
         } catch (err) {
             const error = err as AxiosError;
             if(!axios.isAxiosError(error)){
                 console.log(error)
             }
+            setCustomer("")
             console.log(error.response?.data.error_description)
         }
     }
@@ -71,6 +88,7 @@ export function RideContextProvider({children}: IRideContextProviderProps) {
             if(confirm.request.status === 200){
                 setErrorMessage("");
                 alert("Viagem confirmada. Boa viagem!!");
+                navigate("/history")
             }
         } catch (err) {
             const error = err as AxiosError;
@@ -78,6 +96,21 @@ export function RideContextProvider({children}: IRideContextProviderProps) {
                 console.log(error)
             }
             setErrorMessage(error.response?.data.error_description)
+        }
+    }
+
+    async function historyRide(data: FieldValues){
+        const query = data.driver_id === "" ? "" : `?driver_id=${data.driver_id}`;
+        try {
+            const rides = await axios.get(`http://localhost:8080/ride/${data.customer_id}${query}`);
+            setRideList(rides.data);
+        } catch (err) {
+            setRideList(undefined)
+            const error = err as AxiosError;
+            if(!axios.isAxiosError(error)){
+                console.log(error)
+            }
+            alert(error.response?.data.error_description)
         }
     }
 
@@ -89,7 +122,10 @@ export function RideContextProvider({children}: IRideContextProviderProps) {
             setEstimateRides,
             confirmRide,
             address,
-            errorMessage          
+            errorMessage,
+            historyRide,
+            rideList,
+            customer       
         }}
         >
             {children}

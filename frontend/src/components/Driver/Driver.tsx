@@ -14,11 +14,11 @@ interface ISubmitRide {
 }
 
 export const Driver = ({driver}: IDriverProps) => {
-    const {estimateRides, confirmRide, address} = useContext(RideContext);
+    const {estimateRides, confirmRide, address, customer} = useContext(RideContext);
 
     const onsubmit = ({driver_id, driver_name, value}: ISubmitRide) => {
         const ride = {
-            customer_id: "1",
+            customer_id: customer,
             origin: address?.origin,
             destination: address?.destination,
             distance: estimateRides?.distance,
