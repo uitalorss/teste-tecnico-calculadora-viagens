@@ -4,7 +4,6 @@ import { FieldValues } from "react-hook-form";
 import axios, { AxiosError } from "axios";
 import { useNavigate } from "react-router-dom";
 import { IAdress } from "../helpers/IAddress";
-import { IRide } from "../helpers/IRide";
 import { IRideList } from "../helpers/IRideList";
 
 interface IRideContextProviderType {
@@ -23,6 +22,7 @@ interface IRideContextProviderProps {
     children: ReactNode
 }
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const RideContext = createContext({} as IRideContextProviderType)
 
 export function RideContextProvider({children}: IRideContextProviderProps) {
@@ -95,7 +95,7 @@ export function RideContextProvider({children}: IRideContextProviderProps) {
             if(!axios.isAxiosError(error)){
                 console.log(error)
             }
-            setErrorMessage(error.response?.data.error_description)
+            alert(error.response?.data.error_description)
         }
     }
 

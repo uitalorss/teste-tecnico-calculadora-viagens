@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { IOptionDrivers } from "../../helpers/IOptionDrivers";
-import { ContentDriver, DriverContainer } from "./styles";
+import { ChooseButton, ContentDriver, DriverContainer } from "./styles";
 import { RideContext } from "../../contexts/RideContext";
 
 interface IDriverProps {
@@ -53,7 +53,7 @@ export const Driver = ({driver}: IDriverProps) => {
                 <h4>Valor:</h4>
                 <p>R$ {driver.value}</p>
             </ContentDriver>
-            <button onClick={() => onsubmit({driver_id: driver.id, driver_name: driver.name, value: driver.value})}>Escolher</button>
+            <ChooseButton onClick={() => onsubmit({driver_id: driver.id, driver_name: driver.name, value: driver.value})}>Escolher</ChooseButton>
         </DriverContainer>
     )
 }
