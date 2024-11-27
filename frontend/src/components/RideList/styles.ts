@@ -10,4 +10,18 @@ export const RideListContainer = styled.div`
             margin-top: 2.5rem;
         }
     }
+    @media only screen and (min-width: 480px) and (max-width: 768px){
+        width: 60%;
+        margin: 0 auto;
+    }
+
+    @media only screen and (min-width: 769px) and (max-width: 1024px){
+        width: 40%;
+        margin: 0 auto;
+    }
+
+    @media only screen and (min-width: 1025px){
+        width: 40%;
+        margin: 0 auto;
+    }
 `

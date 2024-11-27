@@ -20,24 +20,24 @@ export const History = () => {
                 <h3>Minhas viagens</h3>
             </Header>
             <FormGroup>
-                    <div>
-                        <span>Usuário</span>
-                        <input type="number" {...register("customer_id")}/>
-                    </div>
-                    <div>
-                        <span>Motorista</span>
-                        <input type="number" {...register("driver_id")}/>
-                    </div>
-                    <div className="button">
-                        <Button onClick={() => handleSubmit(onsubmit)()}>Buscar</Button>
-                    </div>
-                </FormGroup>
+                <div>
+                    <span>Usuário</span>
+                    <input type="number" {...register("customer_id")}/>
+                </div>
+                <div>
+                    <span>Motorista</span>
+                    <input type="number" {...register("driver_id")}/>
+                </div>
+                <div className="button">
+                    <Button onClick={() => handleSubmit(onsubmit)()}>Buscar</Button>
+                </div>
+            </FormGroup>
                 
-                {!rideList ? (
-                    <div></div>
-                ):(
-                    <RideList  customer_id={rideList?.customer_id} rides={rideList?.rides}/>
-                )}
+            {!rideList ? (
+                <div></div>
+            ):(
+                <RideList  customer_id={rideList?.customer_id} rides={rideList?.rides}/>
+            )}
         </Container>
     )
 }

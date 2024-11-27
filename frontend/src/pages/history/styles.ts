@@ -22,6 +22,23 @@ export const FormGroup = styled.div`
         &.button{
             justify-content: flex-end;
         }
+        @media only screen and (min-width: 480px) and (max-width: 768px){
+            justify-content: center
+        }
+    }
+    @media only screen and (min-width: 480px) and (max-width: 768px){
+        width: 60%;
+        margin: 0 auto;
+    }
+
+    @media only screen and (min-width: 769px) and (max-width: 1024px){
+        width: 40%;
+        margin: 0 auto;
+    }
+
+    @media only screen and (min-width: 1025px){
+        width: 40%;
+        margin: 0 auto;
     }
 `
 

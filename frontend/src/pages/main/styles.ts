@@ -17,6 +17,20 @@ export const FormRoutes = styled.div`
         line-height: 1.6;
         border-radius: 8px;
     }
+    @media only screen and (min-width: 480px) and (max-width: 768px){
+        width: 60%;
+        margin: 0 auto;
+    }
+
+    @media only screen and (min-width: 769px) and (max-width: 1024px){
+        width: 40%;
+        margin: 0 auto;
+    }
+
+    @media only screen and (min-width: 1025px){
+        width: 40%;
+        margin: 0 auto;
+    }
 `
 
 export const Button = styled.button`
