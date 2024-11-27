@@ -48,7 +48,6 @@ export const Header = styled.header`
 `;
 
 export const SpanError = styled.span`
-
   &.active {
     display: block;
     padding: 1rem;
@@ -56,8 +55,21 @@ export const SpanError = styled.span`
     color: #34495e;
     border-radius: 10px;
     text-align: center;
-    @media (max-width: 820px) {
-      width: 100%;
+
+    @media only screen and (min-width: 480px) and (max-width: 768px){
+        width: 60%;
+        margin: 1.5rem auto 0 auto;
+    }
+
+    @media only screen and (min-width: 769px) and (max-width: 1024px){
+        width: 40%;
+        margin: 1.5rem auto 0 auto;
+    }
+
+    @media only screen and (min-width: 1025px){
+        width: 40%;
+        margin: 1.5rem auto 0 auto;
     }
   }
+
 `;
