@@ -3,6 +3,8 @@ import { RideRepository } from "../infra/repositories/RideRepository";
 import { IGetRidesRequestDTO } from "../domain/models/DTO/IGetRIdesRequestDTO";
 import driversData from "../../../shared/database/drivers.json"
 import { InvalidDriverError, NoRidesFoundError } from "../../../shared/errors/ApiError";
+import { IDriver } from "../domain/models/IDriver";
+import { IRide } from "../domain/models/IRide";
 
 @injectable()
 export class GetRidesService {
@@ -19,13 +21,38 @@ export class GetRidesService {
             }
         }
 
+        const ridesData = await this.rideRepository.get({customer_id, driver_id});
 
-        const rides = await this.rideRepository.get({customer_id, driver_id});
-
-        if(rides.length < 1){
+        if(ridesData.length < 1){
             throw new NoRidesFoundError("Nenhum registro encontrado.");
         }
 
-        return rides
+
+
+        const ridesfilled = ridesData.map(item => ({
+            id: item.id,
+            origin: item.origin,
+            destination: item.destination,
+            distance: item.distance,
+            duration: item.duration,
+            driver: {
+                id: item.driver,
+                name: extractDriverName(item)
+            },
+            value: item.value
+        }))
+
+
+        const ride = {
+            customer_id,
+            rides: ridesfilled
+        }
+
+        return ride
     }
+}
+
+function extractDriverName(ride: IRide){
+    const driverToExtract = driversData.find(item => item.id === ride.driver);
+    return driverToExtract?.name;
 }

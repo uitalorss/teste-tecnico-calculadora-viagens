@@ -3,11 +3,12 @@ import { injectable } from "tsyringe";
 import driversData from "../../../shared/database/drivers.json"
 import { IEstimateRideRequestDTO } from "../domain/models/DTO/IEstimateRideRequestDTO";
 import { InvalidDataError } from "../../../shared/errors/ApiError";
+import { IEstimateRideResponseDTO } from "../domain/models/DTO/IEstimateRideResponseDTO";
 
 @injectable()
 export class EstimateRideService {
 
-    public async execute({customer_id, origin, destination}: IEstimateRideRequestDTO){
+    public async execute({customer_id, origin, destination}: IEstimateRideRequestDTO): Promise<IEstimateRideResponseDTO | undefined>{
         if(origin === destination){
             throw new InvalidDataError("Endereços de partida e destino são iguais.")
         }
