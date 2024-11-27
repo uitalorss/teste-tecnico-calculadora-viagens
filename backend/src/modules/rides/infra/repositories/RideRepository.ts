@@ -37,13 +37,17 @@ export class RideRepository implements IRideRepository {
                 where: {
                     customer_id,
                     driver: parseInt(driver_id)
-                },
+                },order: {
+                    date: "DESC",
+                }
             });
             return rides;
         }else{
             const rides = await this.rideRepository.find({
                 where: {
                     customer_id
+                },order: {
+                    date: "DESC",
                 }
             });
             return rides;
