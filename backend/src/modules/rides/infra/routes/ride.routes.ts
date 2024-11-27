@@ -10,3 +10,4 @@ const rideController = new RideController();
 rideRoutes.post("/estimate", validateRequest(estimateRideSchema), rideController.estimate);
 rideRoutes.patch("/confirm", rideController.confirm);
 rideRoutes.get("/:customer_id", rideController.find)
+rideRoutes.post("/map", rideController.createMap)

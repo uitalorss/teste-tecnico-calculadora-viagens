@@ -5,6 +5,7 @@ import { CreateRideService } from "../../services/CreateRideService";
 import { EstimateRideService } from "../../services/EstimateRideService";
 import { GetRidesService } from "../../services/GetRidesService";
 import { InvalidDataError } from "../../../../shared/errors/ApiError";
+import { CreateMapService } from "../../services/createMapService";
 
 
 export class RideController {
@@ -32,5 +33,14 @@ export class RideController {
         
         const rides = await getRides.execute({customer_id, driver_id});
         res.json(rides);
+    }
+
+    public async createMap(req: Request, res: Response){
+        const {coordinate} = req.body;
+        const createMap = container.resolve(CreateMapService);
+
+        const map = await createMap.execute(coordinate);
+        
+        res.json({image: `data:image/jpeg;base64,${map}`})
     }
 }
