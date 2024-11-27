@@ -3,6 +3,8 @@ import { Button, FormRoutes } from "./styles"
 import { useContext } from "react";
 import { RideContext } from "../../contexts/RideContext";
 import { Container, Header, SpanError } from "../../styles/global";
+import { Link } from "react-router-dom";
+
 
 
 export const Main = () => {
@@ -23,6 +25,9 @@ export const Main = () => {
                     <input type="text" placeholder="Partida" {...register("origin")}/>
                     <input type="text" placeholder="Destino" {...register("destination")}/>
                     <Button onClick={() => handleSubmit(onsubmit)()}><span>Buscar</span></Button>
+                    <Link to={"/history"}>
+                        <span>Histórico</span>
+                    </Link>
             </FormRoutes>
             <SpanError className={errorMessage ? "active" : ""}>
                 {errorMessage }

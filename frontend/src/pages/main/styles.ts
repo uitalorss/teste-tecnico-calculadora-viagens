@@ -17,6 +17,25 @@ export const FormRoutes = styled.div`
         line-height: 1.6;
         border-radius: 8px;
     }
+
+    a{
+        display: flex;
+        align-items: center;
+        gap: 0.3rem;
+        padding: 1rem 1.25rem;
+        background: #55efc4;
+        border: none;
+        border-radius: 8px;
+        color: #2d3436;
+        font-weight: bold;
+        font-size: 1rem;
+        display: flex;
+        justify-content: center;
+        cursor: pointer;
+        text-decoration: none;
+
+        transition: background-color 0.1s;
+    }
     @media only screen and (min-width: 480px) and (max-width: 768px){
         width: 60%;
         margin: 0 auto;

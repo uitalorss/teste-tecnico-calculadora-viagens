@@ -59,3 +59,28 @@ export const Button = styled.button`
 
   transition: background-color 0.1s;
 `;
+
+export const HomeButton = styled.div`
+    position: absolute;
+    padding-top: 2rem;
+    display: block;
+    width: 4rem;
+    a{
+        display: flex;
+        align-items: center;
+        gap: 0.3rem;
+        padding: 1rem;
+        background: #55efc4;
+        border: none;
+        border-radius: 12px;
+        color: #2d3436;
+        font-weight: bold;
+        font-size: 1rem;
+        display: flex;
+        justify-content: center;
+        cursor: pointer;
+        text-decoration: none;
+
+        transition: background-color 0.1s;
+    }
+`

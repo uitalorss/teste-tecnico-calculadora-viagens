@@ -60,6 +60,7 @@ export function RideContextProvider({children}: IRideContextProviderProps) {
         };
 
         try {
+            setErrorMessage("");
             const estimate = await axios.post("http://localhost:8080/ride/estimate", data, axiosConfig);
             setEstimateRides(estimate.data)
             
@@ -97,7 +98,7 @@ export function RideContextProvider({children}: IRideContextProviderProps) {
                 console.log(error)
             }
             const responseData: IApiError = error.response?.data as IApiError
-            setErrorMessage(responseData.error_description)
+            alert(responseData.error_description)
         }
     }
 
@@ -113,7 +114,7 @@ export function RideContextProvider({children}: IRideContextProviderProps) {
                 console.log(error)
             }
             const responseData: IApiError = error.response?.data as IApiError
-            setErrorMessage(responseData.error_description)
+            alert(responseData.error_description)
         }
     }
 

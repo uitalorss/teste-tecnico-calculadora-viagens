@@ -34,6 +34,7 @@ export const Container = styled.main`
 `;
 
 export const Header = styled.header`
+  display: flex;
   width: 100%;
   background: #03a877;
   padding: 3rem;
