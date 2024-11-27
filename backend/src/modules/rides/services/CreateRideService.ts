@@ -27,7 +27,7 @@ export class CreateRideService {
             throw new InvalidDistanceError("Motorista indisponível para essa corrida.")
         }
 
-        const user = await this.rideRepository.create({customer_id, destination, distance, driver: driver.id, duration, origin, value})
+        await this.rideRepository.create({customer_id, destination, distance, driver: driver.id, duration, origin, value})
         return {
             success: true
         }

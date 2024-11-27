@@ -17,7 +17,7 @@ export class RideRepository implements IRideRepository {
     }
 
 
-    public async create({customer_id, destination, distance, driver, duration, origin, value}: IConfirmRideDTO): Promise<IRide> {
+    public async create({customer_id, destination, distance, driver, duration, origin, value}: IConfirmRideDTO): Promise<void> {
         const ride = this.rideRepository.create({
             customer_id,
             destination,
@@ -29,7 +29,6 @@ export class RideRepository implements IRideRepository {
         })
 
         await this.rideRepository.save(ride);
-        return ride;
     }
 
     public async get({customer_id, driver_id}: IGetRidesDTO): Promise<Ride[]> {

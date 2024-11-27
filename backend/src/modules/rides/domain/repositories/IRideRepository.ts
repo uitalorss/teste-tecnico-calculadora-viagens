@@ -7,6 +7,6 @@ import { IRide } from "../models/IRide";
 
 
 export interface IRideRepository {
-    create({}: IConfirmRideDTO): Promise<IRide>
+    create({}: IConfirmRideDTO): Promise<void>
     get({}: IGetRidesDTO): Promise<Ride[]>;
 }

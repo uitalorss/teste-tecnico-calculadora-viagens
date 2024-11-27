@@ -33,6 +33,7 @@ export class GetRidesService {
             id: item.id,
             origin: item.origin,
             destination: item.destination,
+            date: item.date,
             distance: item.distance,
             duration: item.duration,
             driver: {
