@@ -22,6 +22,7 @@ export const RideContainer = styled.div`
 export const ContentRide = styled.div`
     display: flex;
     gap: .25rem .75rem;
+    align-items: center;
     p{
         font-size: .8rem;
     }

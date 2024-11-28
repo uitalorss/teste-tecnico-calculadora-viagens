@@ -44,15 +44,24 @@ export const MapSection = styled.div`
     @media only screen and (min-width: 480px) and (max-width: 768px){
         width: 60%;
         margin: 0 auto;
+        p{
+            padding: 2rem 0;
+        }
     }
 
     @media only screen and (min-width: 769px) and (max-width: 1024px){
         width: 40%;
         margin: 0 auto;
+        p{
+            padding: 2rem 0;
+        }
     }
 
     @media only screen and (min-width: 1025px){
         width: 40%;
         margin: 0 auto;
+        p{
+            padding: 4rem 0;
+        }
     }
 `

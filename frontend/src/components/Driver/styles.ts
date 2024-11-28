@@ -14,6 +14,7 @@ export const DriverContainer = styled.div`
 export const ContentDriver = styled.div`
     display: flex;
     gap: .25rem .75rem;
+    align-items: center;
     p{
         font-size: .8rem;
     }
