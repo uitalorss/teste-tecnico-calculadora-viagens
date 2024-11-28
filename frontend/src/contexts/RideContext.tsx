@@ -60,6 +60,7 @@ export function RideContextProvider({children}: IRideContextProviderProps) {
         };
 
         try {
+            setSourceImage("");
             setErrorMessage("");
             const estimate = await axios.post("http://localhost:8080/ride/estimate", data, axiosConfig);
             setEstimateRides(estimate.data)
